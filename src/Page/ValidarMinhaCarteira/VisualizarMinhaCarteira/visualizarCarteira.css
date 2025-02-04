@@ -1,0 +1,131 @@
+.container2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+    min-height: 100vh;
+  }
+
+  .card2 {
+    max-width: 450px;
+    width: 100%;
+    background: #ffffff;
+    border: 2px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(3, 2, 2, 0.2);
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out; 
+  }
+
+  .card3 {
+    max-width: 450px;
+    width: 100%;
+    background: #ffffff;
+    border: 2px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(3, 2, 2, 0.2);
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .textoValidado {
+    font-size: 25px;
+    color: #0C2612;
+    text-align: center;
+    margin: 15px 0;
+  }
+
+  .card-content {
+    margin: 10px 0;
+  }
+
+  .card-row {
+    font-size: 16px;
+    color: #323232;
+    text-align: justify;
+    font-family: sans-serif;
+    margin: 5px 0;
+  }
+
+  .divider {
+    background: #333;
+    height: 2px;
+    margin: 10px 0;
+  }
+
+  .user-image {
+    width: 150px;
+    height: 190px;
+    align-self: center;
+    margin: 15px auto;
+    border: 1px solid black;
+    display: block;
+  }
+  .card-image {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Mobile styles */
+  @media (max-width: 600px) {
+    .card2 {
+      max-width: 100%;
+      padding: 15px; 
+    }
+
+    .card3 {
+      max-width: 100%;
+      padding: 15px; 
+    }
+
+    .textoValidado {
+      font-size: 22px;
+    }
+
+    .card-row {
+      font-size: 14px;
+    }
+
+    .user-image {
+      width: 120px;
+      height: 160px;
+    }
+  }
+
+  .suspended-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #E25A0B;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.suspended-button:hover {
+    background-color: #D04F0A;
+    transform: scale(1.1);
+}
