@@ -25,9 +25,9 @@ const Login = () => {
     const expirationTime = 1 /* new Date(new Date().getTime() + 15 * 1000); */
 
     const handleLogin = () => {
-        LoginUserMinhaCarteira({cpf,senha: password}).then(res=>{
-            if(res?.data?.usuario == true){
-                getInfoAluno({ email: res?.data?.email }).then(res => { 
+        LoginUserMinhaCarteira({cpf,senha: password}).then(resp=>{
+            if(resp?.data?.usuario == true){
+                getInfoAluno({ email: resp?.data?.email }).then(res => { 
                     var infoEstudante = null
 
                     res.data.map(item=>{
@@ -39,7 +39,7 @@ const Login = () => {
                     setCurrentUser(infoEstudante)
                 })
                 Cookies.set("usuario", "true", { expires: expirationTime })
-                Cookies.set("email", res?.data?.email, { expires: expirationTime })
+                Cookies.set("email", resp?.data?.email, { expires: expirationTime })
                 navigate('/visualizaminhacarteira') 
 
             }else{

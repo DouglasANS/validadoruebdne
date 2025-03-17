@@ -6,5 +6,5 @@ const host = 'https://backendfunemg-backfune.alehbv.easypanel.host'
 export const currentServer = host
 
 export const LoginUserMinhaCarteira = async ({cpf,senha}) =>
-    axios.post(`${currentServer}/usuario/login2`, {cpf,senha},)
+    axios.post(`${currentServer}/api/loginueb`, {cpf,senha},)
 

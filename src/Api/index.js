@@ -32,7 +32,7 @@ export const getAllescolaridade = async (params) =>
     })
 
 export const getInfoAluno = async ({ email }) =>
-    axios.get(`${currentServer}/aluno/validacao/${email}`)
+    axios.get(`${currentServer}/api/getUserByEmail/${email}`)
 
 export const getAllCursos = async (params) =>
     axios.get(`${currentServer}/curso/`, {
