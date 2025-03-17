@@ -1,4 +1,10 @@
 import axios from "axios";
+
+const local = 'http://localhost:3002'
+const host = 'https://backendfunemg-backfune.alehbv.easypanel.host'
+
+export const currentServer = host
+
 export const LoginUserMinhaCarteira = async ({cpf,senha}) =>
-    axios.post(`https://srv495671.hstgr.cloud:8080/usuario/login2`, {cpf,senha},)
+    axios.post(`${currentServer}/usuario/login2`, {cpf,senha},)
 

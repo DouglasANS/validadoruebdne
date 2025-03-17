@@ -7,37 +7,42 @@ import axios from "axios";
     } 
 } */
 
+    const local = 'http://localhost:3002'
+    const host = 'https://backendfunemg-backfune.alehbv.easypanel.host'
+
+export const currentServer = host
+
 export const LoginUser = async (params) =>
-    axios.post(`https://srv495671.hstgr.cloud:8080/usuario/login`, params,)
+    axios.post(`${currentServer}/usuario/login`, params,)
 
 export const CadastrarUser = async (params) =>
-    axios.post(`https://srv495671.hstgr.cloud:8080/aluno/cadastro`, params, {
+    axios.post(`${currentServer}/aluno/cadastro`, params, {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
     })
 export const CadastrarEstudante = async (params) =>
-    axios.post(`https://srv495671.hstgr.cloud:8080/estudante/cadastro`, params,)
+    axios.post(`${currentServer}/estudante/cadastro`, params,)
 
 export const getAllescolaridade = async (params) =>
-    axios.get(`https://srv495671.hstgr.cloud:8080/aluno/escolaridade/all`, {
+    axios.get(`${currentServer}/aluno/escolaridade/all`, {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
     })
 
 export const getInfoAluno = async ({ email }) =>
-    axios.get(`https://srv495671.hstgr.cloud:8080/aluno/validacao/${email}`)
+    axios.get(`${currentServer}/aluno/validacao/${email}`)
 
 export const getAllCursos = async (params) =>
-    axios.get(`https://srv495671.hstgr.cloud:8080/curso/`, {
+    axios.get(`${currentServer}/curso/`, {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
     })
 
 export const getAllCursosEstudante = async (params) =>
-    axios.get(`https://srv495671.hstgr.cloud:8080/estudante/cursos/info`, {
+    axios.get(`${currentServer}/estudante/cursos/info`, {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
@@ -45,7 +50,7 @@ export const getAllCursosEstudante = async (params) =>
 
 
 export const MatricularCurso = async ({ userId, cursoId }) =>
-    fetch(`https://srv495671.hstgr.cloud:8080/estudante/${userId}/curso/${cursoId}/matricular`, {
+    fetch(`${currentServer}/estudante/${userId}/curso/${cursoId}/matricular`, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`,
@@ -56,7 +61,7 @@ export const MatricularCurso = async ({ userId, cursoId }) =>
     })
 
     export const desmatricularCurso = async ({ userId, cursoId }) =>
-    fetch(`https://srv495671.hstgr.cloud:8080/estudante/${userId}/curso/${cursoId}/desmatricular`, {
+    fetch(`${currentServer}/estudante/${userId}/curso/${cursoId}/desmatricular`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`,
@@ -69,7 +74,7 @@ export const MatricularCurso = async ({ userId, cursoId }) =>
 
 export const concluirAula = async (idAula) => {
     const token = localStorage.getItem("token");
-    const url = `https://srv495671.hstgr.cloud:8080/estudante/aula/${idAula}/concluir`;
+    const url = `${currentServer}/estudante/aula/${idAula}/concluir`;
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -90,14 +95,14 @@ export const concluirAula = async (idAula) => {
 };
 
 export const excluirUserById = async (id) =>
-    axios.delete(`https://srv495671.hstgr.cloud:8080/estudante/delete/${id}`, {
+    axios.delete(`${currentServer}/estudante/delete/${id}`, {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
     })
 
 export const editUserById = async (params) =>
-    axios.put(`https://srv495671.hstgr.cloud:8080/estudante/editar`, params,  {
+    axios.put(`${currentServer}/estudante/editar`, params,  {
         headers: {
             'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
