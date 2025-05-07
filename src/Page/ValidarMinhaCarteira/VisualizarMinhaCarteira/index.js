@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 import { useStorageValidarCarteira } from '../StorageValidarCarteira';
 import { getInfoAluno } from '../../../Api';
+import { Button } from '@mui/material';
 
 export default function VisualizarMinhaCarteira() {
     const hasCarteria = true;
@@ -24,10 +25,9 @@ export default function VisualizarMinhaCarteira() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const tokenUser = Cookies.get("usuario")
-        const userEmail = Cookies.get("email")
-        console.log(tokenUser, tokenUser == 'true', currentUser)
+    const tokenUser = Cookies.get("usuario")
+    const userEmail = Cookies.get("email")
+    useEffect(() => { 
 
         if (tokenUser == 'true') {
             
@@ -44,8 +44,7 @@ export default function VisualizarMinhaCarteira() {
                 setCurrentUser(infoEstudante)
             })
 
-        } else {
-            console.log('aqui')
+        } else { 
             handleGoMinhaCarteira()
         }
 
@@ -66,9 +65,9 @@ export default function VisualizarMinhaCarteira() {
                 alignItems: 'center',
             }}
         >
-            <>
+            <> 
                 <SuspendedButton handleGoMinhaCarteira={handleGoMinhaCarteira} />
-                {currentUser == null ? <HasNoCarteira /> :
+                {currentUser == null ? <HasNoCarteira email={userEmail} /> :
                     <HasCarteira currentUser={currentUser} />
                 }
             </>
@@ -128,14 +127,23 @@ document.getElementById('instituicao').innerText = currentUser.instituicao?.toUp
 document.getElementById('curso').innerText = currentUser.curso?.toUpperCase();
 document.getElementById('rg').innerText = currentUser.rg?.toUpperCase(); */
 
-export function HasNoCarteira() {
+export function HasNoCarteira({email}) {
+
+    const openWhatsApp = () => {
+        const phoneNumber = "5531996092454"; 
+        const message = `Olá! Gostaria de solicitar a renovação da carteira do estudante com email: ${email}.`; 
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
+      };
+
     return (
         <div className="containerhasno">
             <div className="card3">
                 <img src={aviso} alt="Aviso" className="card-image" />
                 <h3>
                     Infelizmente, identificamos que você não possui a carteira digital de <b>2025</b> ativa em nosso sistema. Para resolver essa questão, recomendamos que entre em contato com o nosso suporte pelo canal oficial. Nossa equipe está à disposição para auxiliá-lo e garantir que tudo seja resolvido o mais rápido possível.
-                </h3>
+                </h3> 
+                <Button onClick={openWhatsApp} variant="outlined" style={{width: '150px', alignSelf: 'center', marginBottom: '50px'}}  color="error">Expirada!</Button>
             </div>
         </div>
     );
