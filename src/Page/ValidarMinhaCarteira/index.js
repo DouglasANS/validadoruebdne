@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import ReactInputMask from 'react-input-mask';
 import { useNavigate } from 'react-router-dom';
-import { LoginUserMinhaCarteira } from '../../Api/MinhaCarteiraApi';
+import { getImagemByUserId, LoginUserMinhaCarteira } from '../../Api/MinhaCarteiraApi';
 import { notify } from '../../components/Notify';
 import { getInfoAluno } from '../../Api';
 import Cookies from "js-cookie";
@@ -26,21 +26,16 @@ const Login = () => {
 
     const handleLogin = () => {
         LoginUserMinhaCarteira({cpf,senha: password}).then(resp=>{
-            if(resp?.data?.usuario == true){
-                getInfoAluno({ email: resp?.data?.email }).then(res => { 
-                    var infoEstudante = null
+            console.log(resp)
+            if(resp?.data?.status == true){
+                getImagemByUserId({ id: resp?.data?.estudante_id }).then(res => { 
 
-                    res.data.map(item=>{
-                        if(item.ano == 2025){
-                            infoEstudante = item
-                        }
-                    })
-
-                    setCurrentUser(infoEstudante)
+                    setCurrentUser({ ...resp?.data, imagem: res.data.imagem })
+                    Cookies.set("usuario", "true", { expires: expirationTime })
+                    Cookies.set("email", resp?.data?.email, { expires: expirationTime })
+                    Cookies.set("cpf", resp?.data?.cpf, { expires: expirationTime })
+                    navigate('/visualizaminhacarteira') 
                 })
-                Cookies.set("usuario", "true", { expires: expirationTime })
-                Cookies.set("email", resp?.data?.email, { expires: expirationTime })
-                navigate('/visualizaminhacarteira') 
 
             }else{
                 notify('Usuário inválido!')

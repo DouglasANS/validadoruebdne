@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useStorageValidarCarteira } from '../StorageValidarCarteira';
 import { getInfoAluno } from '../../../Api';
 import { Button } from '@mui/material';
+import { getImagemByUserId, getInfoAlunoByCpf } from '../../../Api/MinhaCarteiraApi';
 
 export default function VisualizarMinhaCarteira() {
     const hasCarteria = true;
@@ -17,6 +18,7 @@ export default function VisualizarMinhaCarteira() {
         navigate('/')
         Cookies.remove('usuario')
         Cookies.remove('email')
+        Cookies.remove('cpf')
     };
 
     const { currentUser } = useStorageValidarCarteira(state => state)
@@ -27,24 +29,24 @@ export default function VisualizarMinhaCarteira() {
 
     const tokenUser = Cookies.get("usuario")
     const userEmail = Cookies.get("email")
-    useEffect(() => { 
-
+    const cpf = Cookies.get("cpf")
+    useEffect(() => {
+        console.log(cpf)
         if (tokenUser == 'true') {
-            
-            getInfoAluno({ email: userEmail }).then(res => {
-                var infoEstudante = null
 
-                res.data.map(item => {
-                    if (item.ano == 2025) {
-                        infoEstudante = item
-                    }
+            getInfoAlunoByCpf({ cpf: cpf }).then(resp => {
+                if(resp?.data.ano != '2025'){
+                    return setCurrentUser(null)
+                }
+                getImagemByUserId({ id: resp?.data?.estudante_id }).then(res => {
+
+                    setCurrentUser({ ...resp?.data, imagem: res.data.imagem })  
                 })
 
 
-                setCurrentUser(infoEstudante)
             })
 
-        } else { 
+        } else {
             handleGoMinhaCarteira()
         }
 
@@ -65,7 +67,7 @@ export default function VisualizarMinhaCarteira() {
                 alignItems: 'center',
             }}
         >
-            <> 
+            <>
                 <SuspendedButton handleGoMinhaCarteira={handleGoMinhaCarteira} />
                 {currentUser == null ? <HasNoCarteira email={userEmail} /> :
                     <HasCarteira currentUser={currentUser} />
@@ -127,14 +129,14 @@ document.getElementById('instituicao').innerText = currentUser.instituicao?.toUp
 document.getElementById('curso').innerText = currentUser.curso?.toUpperCase();
 document.getElementById('rg').innerText = currentUser.rg?.toUpperCase(); */
 
-export function HasNoCarteira({email}) {
+export function HasNoCarteira({ email }) {
 
     const openWhatsApp = () => {
-        const phoneNumber = "5531996092454"; 
-        const message = `Olá! Gostaria de solicitar a renovação da carteira do estudante com email: ${email}.`; 
+        const phoneNumber = "5531996092454";
+        const message = `Olá! Gostaria de solicitar a renovação da carteira do estudante com email: ${email}.`;
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, "_blank");
-      };
+    };
 
     return (
         <div className="containerhasno">
@@ -142,8 +144,8 @@ export function HasNoCarteira({email}) {
                 <img src={aviso} alt="Aviso" className="card-image" />
                 <h3>
                     Infelizmente, identificamos que você não possui a carteira digital de <b>2025</b> ativa em nosso sistema. Para resolver essa questão, recomendamos que entre em contato com o nosso suporte pelo canal oficial. Nossa equipe está à disposição para auxiliá-lo e garantir que tudo seja resolvido o mais rápido possível.
-                </h3> 
-                <Button onClick={openWhatsApp} variant="outlined" style={{width: '150px', alignSelf: 'center', marginBottom: '50px'}}  color="error">Expirada!</Button>
+                </h3>
+                <Button onClick={openWhatsApp} variant="outlined" style={{ width: '150px', alignSelf: 'center', marginBottom: '50px' }} color="error">Expirada!</Button>
             </div>
         </div>
     );
