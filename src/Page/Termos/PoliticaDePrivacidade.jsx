@@ -5,7 +5,7 @@ const PoliticaDePrivacidade = () => {
     <div style={styles.container}>
       <h1 style={styles.title}>Política de Privacidade</h1>
 
-      <p style={styles.text}><strong>Última atualização:</strong> 16/07/2025</p>
+      <p style={styles.text}><strong>Última atualização:</strong> 29/07/2025</p>
 
       <p style={styles.text}>
         O aplicativo <strong>UEB - Carteirinha de estudante</strong> valoriza a sua privacidade e se compromete com a proteção dos dados pessoais dos usuários.

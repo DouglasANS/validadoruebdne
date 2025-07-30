@@ -5,7 +5,7 @@ const TermosDeUso = () => {
     <div style={styles.container}>
       <h1 style={styles.title}>Termos de Uso – UEB – Carteirinha de Estudante</h1>
 
-      <p style={styles.text}><strong>Última atualização:</strong> 16/07/2025</p>
+      <p style={styles.text}><strong>Última atualização:</strong> 29/07/2025</p>
 
       <h2 style={styles.subtitle}>1. Aceitação dos Termos</h2>
       <p style={styles.text}>
