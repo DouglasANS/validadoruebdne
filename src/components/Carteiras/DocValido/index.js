@@ -25,10 +25,18 @@ export default function DocValido() {
             </div>
         )
     } else if (typeof userData === 'object' && userData !== null) {
-        // Se for um objeto, trate como objeto
+        const text = `UEB atesta que ${userData?.nome?.toUpperCase()} é estudante e está regularmente matrículado(a) em Ensino ${escolaridadeAllBack[userData?.escolaridade?.toUpperCase()] || userData?.escolaridade?.toUpperCase()} na instituição ${userData?.instituicao?.toUpperCase()}`
+
         return (
-            <>
-            </>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+
+                <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px', width: '100vw' }}>
+                    <img src={nameCertificado} width={150} />
+                    <img src={meiaEntrada} width={150} />
+                    <h4 style={{ padding: '10px 20px' }}><b style={{fontFamily: 'Roboto',}}>{text}</b></h4>
+                    <img src={textCertificado} style={{ width: '100%' }} />
+                </div>
+            </div>
         )
     } else {
         // Caso seja null, undefined ou outro tipo inesperado

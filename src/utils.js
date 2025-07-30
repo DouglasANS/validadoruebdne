@@ -78,3 +78,19 @@ export function capitalizeInitials(text) {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Converte a inicial para maiúscula
       .join(' '); // Junta as palavras novamente em uma string
   }
+
+  export function isCarteirinhaValida(dataString) {
+    if(dataString == undefined){
+        return false
+    }
+  // Converte "31/03/2025" em um objeto Date
+  const [dia, mes, ano] = dataString.split('/');
+  const dataLimite = new Date(ano, mes - 1, dia); // JS: mês começa do 0
+
+  // Pega a data atual sem horário
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0); // remove hora, minuto, segundo e milissegundo
+
+  // Compara
+  return hoje <= dataLimite;
+}

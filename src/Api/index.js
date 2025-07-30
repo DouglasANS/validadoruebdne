@@ -12,6 +12,25 @@ import axios from "axios";
 
 export const currentServer = host
 
+export const registarAcessoValidarCertificado = async ({ idUser, tipo }) =>
+    axios.post(`${currentServer}/api/registarAcessoValidarCertificado`, { idUser, tipo })
+
+export const getImagemByUserId = async ({ id }) =>
+    axios.get(`${currentServer}/api/imagem/${id}`)
+
+export const updateCpfByEmail = async ({cpf, email}) =>
+    axios.put(`${currentServer}/api/updateCpfByEmail`, {cpf, email})
+
+export const getInfoAlunoByCpf = async ({ cpf: cpf }) =>
+    axios.get(`${currentServer}/api/getUserByCPF/${cpf}`)
+
+export const verifyEmailExist = async ({ userEmail }) =>
+    axios.post(`${currentServer}/api/verifyEmailExist`, { userEmail }, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+
 export const LoginUser = async (params) =>
     axios.post(`${currentServer}/usuario/login`, params,)
 
