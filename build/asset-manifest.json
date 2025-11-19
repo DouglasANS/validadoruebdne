@@ -1,23 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.f743ac7c.css",
-    "main.js": "/static/js/main.cc11ff6d.js",
-    "static/media/mulher.png": "/static/media/mulher.9b66fa53a6fcd4a66b7a.png",
-    "static/media/carteira2.jpg": "/static/media/carteira2.716c31803d5b931317e1.jpg",
-    "static/media/carteira2back.jpg": "/static/media/carteira2back.7533e222dd87888c86f5.jpg",
-    "static/media/dne.png": "/static/media/dne.f34ced27b231ae3cbb86.png",
+    "main.css": "/static/css/main.f8b473f7.css",
+    "main.js": "/static/js/main.6d35a0db.js",
+    "static/media/backgroundcarteira.jpg": "/static/media/backgroundcarteira.e8b0b8e9173f3936d5a0.jpg",
+    "static/media/login2.jpg": "/static/media/login2.104ef5d8d7fd1de69825.jpg",
+    "static/media/error404.jpg": "/static/media/error404.ba485a8fba0961513e15.jpg",
+    "static/media/meiaentrada.png": "/static/media/meiaentrada.16d0f15673306e89271e.png",
+    "static/media/aviso.jpg": "/static/media/aviso.b9f4f926abe53f34d2a3.jpg",
     "static/media/textCertificado.jpg": "/static/media/textCertificado.b26b1ef512ef75ef5dc8.jpg",
-    "static/media/carteira1.jpg": "/static/media/carteira1.1106bbb17d23f17bdcf2.jpg",
-    "static/media/funemg.png": "/static/media/funemg.26a00db46f489bd60f21.png",
-    "static/media/teacher.png": "/static/media/teacher.c85120f7d362c84b0a5b.png",
-    "static/media/graduated.png": "/static/media/graduated.18a876fb8ca953800670.png",
+    "static/media/ueb.png": "/static/media/ueb.d90316275946912bb7c7.png",
     "static/media/meiaEntrada.jpg": "/static/media/meiaEntrada.148f6eae49ed01d7afdd.jpg",
     "index.html": "/index.html",
-    "main.f743ac7c.css.map": "/static/css/main.f743ac7c.css.map",
-    "main.cc11ff6d.js.map": "/static/js/main.cc11ff6d.js.map"
+    "main.f8b473f7.css.map": "/static/css/main.f8b473f7.css.map",
+    "main.6d35a0db.js.map": "/static/js/main.6d35a0db.js.map"
   },
   "entrypoints": [
-    "static/css/main.f743ac7c.css",
-    "static/js/main.cc11ff6d.js"
+    "static/css/main.f8b473f7.css",
+    "static/js/main.6d35a0db.js"
   ]
 }

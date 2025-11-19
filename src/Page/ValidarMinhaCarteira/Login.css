@@ -1,37 +1,41 @@
-.container{
+/* Container principal */
+.container {
   display: flex; 
   flex-direction: column;
+  min-height: 100vh; /* Garante que ocupe toda a altura da tela */
 }
 
-.left-panel{
+/* Painel esquerdo */
+.left-panel {
   width: 100%;
-  height: 100%;
+  flex: 1; /* Ocupa espaço disponível */
   background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.right-panel{
+/* Painel direito */
+.right-panel {
   width: 100%;
-  height: 100vh;
+  flex: 1;
   background-color: #53C593;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.contentCardlogin{
+/* Card do login */
+.contentCardlogin {
   width: 400px;
   height: 500px;
   border-radius: 10px;
   background-color: aliceblue;
   padding: 20px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
-.contentCardlogin h2{
+.contentCardlogin h2 {
   text-align: center;
   margin-top: 10px;
 }
@@ -56,8 +60,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
-  outline: none
-  
+  outline: none;
 }
 
 .input-group .icon {
@@ -68,7 +71,7 @@
   color: #53C593;
 }
 
-.input-group input:focus{
+.input-group input:focus {
   border-color: #53C593;
   background-color: transparent;
   transform: scale(1.01);
@@ -82,46 +85,75 @@
   cursor: pointer;
   border: none;
   color: white;
-  transition: all 0.3s ease; /* Transição suave para o hover */
+  transition: all 0.3s ease;
 }
 
 .contentCardlogin button:hover {
-  background-color: #53C593; /* Cor ligeiramente mais escura no hover */
-  transform: scale(1.03); /* Aumenta o botão levemente */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra leve */
+  background-color: #53C593;
+  transform: scale(1.03);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
-.contentCardlogin img{
+
+.contentCardlogin img {
   text-align: center;
 }
 
 .text-gradient {
   background: linear-gradient(90deg, #53C593, #3E1944);
-  background-clip: text; /* Apenas o texto pega o gradiente */
-  -webkit-text-fill-color: transparent; /* Torna o preenchimento do texto transparente */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-size: 50px;
   font-weight: bold;
 } 
 
-.imagemlogin2{
+.imagemlogin2 {
   width: 300px;
   height: 350px;
 }
 
+/* Layout responsivo */
 @media (min-width: 937px) {
-  .imagemlogin2{
+  .imagemlogin2 {
     width: 500px;
     height: 550px;
   }
-  .container{
+
+  .container {
     display: flex;
     flex-direction: row;
   }
+
   .right-panel {
       width: 50%;
       height: 100vh;
   }
-  .left-panel{
+
+  .left-panel {
     width: 50%;
     height: 100vh;
   }
+}
+
+/* Footer fixo sempre visível */
+.footer-login {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 14px;
+  z-index: 1000; /* Sempre acima do conteúdo */
+}
+
+.footer-login a {
+  color: #53C593;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-login a:hover {
+  text-decoration: underline;
 }
