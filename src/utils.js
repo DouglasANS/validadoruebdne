@@ -1,4 +1,4 @@
-import { getAllCursos, getAllCursosEstudante } from "./Api"; 
+import { getAllCursos, getAllCursosEstudante } from "./Api";
 
 
 
@@ -35,14 +35,14 @@ export const escolaridadeAll = [
 ]
 
 export const escolaridadeAllBack = {
-    FUNDAMENTAL_COMPLETO : "Fundamental",
+    FUNDAMENTAL_COMPLETO: "Fundamental",
     MEDIO_COMPLETO: "Médio",
     TECNICO_COMPLETO: "Técnico",
     SUPERIOR_COMPLETO: "Superior",
     POS_GRADUACAO_COMPLETO: "Pós-graduação",
     MESTRADO_COMPLETO: "Mestrado",
     DOUTORADO_COMPLETO: "Doutorado",
-}  
+}
 
 
 export default function linkEmbed(link) {
@@ -61,7 +61,7 @@ export default function linkEmbed(link) {
     var myId = getId(link);
     return `//www.youtube.com/embed/${myId}`
 }
- 
+
 
 export function formatDateToDDMMYYYY(dateString) {
     // Divide a data no formato "YYYY-MM-DD" em partes separadas
@@ -69,28 +69,28 @@ export function formatDateToDDMMYYYY(dateString) {
     // Retorna a data no formato "DD/MM/YYYY"
     return `${day}/${month}/${year}`;
 }
- 
+
 
 export function capitalizeInitials(text) {
     return text
-      .toLowerCase() // Converte todo o texto para minúsculas
-      .split(' ') // Divide o texto em palavras
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Converte a inicial para maiúscula
-      .join(' '); // Junta as palavras novamente em uma string
-  }
+        .toLowerCase() // Converte todo o texto para minúsculas
+        .split(' ') // Divide o texto em palavras
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Converte a inicial para maiúscula
+        .join(' '); // Junta as palavras novamente em uma string
+}
 
-  export function isCarteirinhaValida(dataString) {
-    if(dataString == undefined){
+export function isCarteirinhaValida(dataString) {
+    if (dataString == undefined) {
         return false
     }
-  // Converte "31/03/2025" em um objeto Date
-  const [dia, mes, ano] = dataString.split('/');
-  const dataLimite = new Date(ano, mes - 1, dia); // JS: mês começa do 0
+    // Converte "31/03/2025" em um objeto Date
+    const [dia, mes, ano] = dataString.split('/');
+    const dataLimite = new Date(ano, mes - 1, dia); // JS: mês começa do 0
 
-  // Pega a data atual sem horário
-  const hoje = new Date();
-  hoje.setHours(0, 0, 0, 0); // remove hora, minuto, segundo e milissegundo
+    // Pega a data atual sem horário
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0); // remove hora, minuto, segundo e milissegundo
 
-  // Compara
-  return hoje <= dataLimite;
+    // Compara
+    return hoje <= dataLimite;
 }

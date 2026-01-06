@@ -3,7 +3,7 @@ import background from '../../../assets/backgroundcarteira.jpg';
 import aviso from '../../../assets/aviso.jpg';
 import './visualizarCarteira.css';
 import { mockAlunoEditApi } from '../../../mock';
-import { escolaridadeAllBack } from '../../../utils';
+import { escolaridadeAllBack, isCarteirinhaValida } from '../../../utils';
 import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 import { useStorageValidarCarteira } from '../StorageValidarCarteira';
@@ -35,7 +35,10 @@ export default function VisualizarMinhaCarteira() {
         if (tokenUser == 'true') {
 
             getInfoAlunoByCpf({ cpf: cpf }).then(resp => {
-                if(resp?.data.ano != '2025'){
+
+                const isValid = isCarteirinhaValida(resp?.data.validadeCarteirinha)
+
+                if(!isValid){
                     return setCurrentUser(null)
                 }
                 getImagemByUserId({ id: resp?.data?.estudante_id }).then(res => {
@@ -67,6 +70,7 @@ export default function VisualizarMinhaCarteira() {
                 alignItems: 'center',
             }}
         >
+            <button onClick={()=>{console.log(currentUser)}}>rteste</button>
             <>
                 <SuspendedButton handleGoMinhaCarteira={handleGoMinhaCarteira} />
                 {currentUser == null ? <HasNoCarteira email={userEmail} /> :
