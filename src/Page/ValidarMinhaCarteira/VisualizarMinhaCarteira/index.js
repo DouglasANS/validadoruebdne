@@ -147,7 +147,7 @@ export function HasNoCarteira({ email }) {
             <div className="card3">
                 <img src={aviso} alt="Aviso" className="card-image" />
                 <h3>
-                    Infelizmente, identificamos que você não possui a carteira digital de <b>2025</b> ativa em nosso sistema. Para resolver essa questão, recomendamos que entre em contato com o nosso suporte pelo canal oficial. Nossa equipe está à disposição para auxiliá-lo e garantir que tudo seja resolvido o mais rápido possível.
+                    Infelizmente, identificamos que você não possui a carteira digital mais recente ativa em nosso sistema. Para resolver essa questão, recomendamos que entre em contato com o nosso suporte pelo canal oficial. Nossa equipe está à disposição para auxiliá-lo e garantir que tudo seja resolvido o mais rápido possível.
                 </h3>
                 <Button onClick={openWhatsApp} variant="outlined" style={{ width: '150px', alignSelf: 'center', marginBottom: '50px' }} color="error">Expirada!</Button>
             </div>
