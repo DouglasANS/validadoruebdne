@@ -1,10 +1,14 @@
 {
-    "redirects": [
-      {
-        "source": "/:path*",
-        "destination": "https://uebcarteirinha.com.br/:path*",
-        "permanent": true
-      }
-    ]
-  }
-  
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.uebcarteirinha.com.br",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://uenestudantil.com.br/$1",
+      "permanent": true
+    }
+  ]
+}
