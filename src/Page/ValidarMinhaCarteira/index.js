@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { motion } from 'framer-motion';
-import { FiUser, FiLock, FiMail } from 'react-icons/fi';
+import { FiUser, FiLock, FiMail, FiCalendar } from 'react-icons/fi';
 import logo from '../../assets/ueb.png'
 import loginimg from '../../assets/login2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,11 +10,11 @@ import ReactInputMask from 'react-input-mask';
 import { useNavigate } from 'react-router-dom';
 import { getImagemByUserId, LoginUserMinhaCarteira } from '../../Api/MinhaCarteiraApi';
 import { notify } from '../../components/Notify';
-import { getInfoAluno } from '../../Api';
+import { getInfoAluno, getUserByCPFAndNascimento } from '../../Api';
 import Cookies from "js-cookie";
 import { useStorageValidarCarteira } from './StorageValidarCarteira';
 const Login = () => {
-    const [password, setPassword] = useState('');
+    const [dataNascimento, setDataNascimento] = useState('');
     const [cpf, setCpf] = useState('');
 
     const navigate = useNavigate();
@@ -22,12 +22,20 @@ const Login = () => {
     const { setCurrentUser } = useStorageValidarCarteira(state => state).dispatch
 
 
+
     const expirationTime = 1 /* new Date(new Date().getTime() + 15 * 1000); */
 
+
     const handleLogin = () => {
-        LoginUserMinhaCarteira({ cpf, senha: password }).then(resp => {
+
+        if (dataNascimento.length !== 10) return alert('Data de nascimento inválida. Use o formato DD/MM/AAAA');
+        const [day, month, year] = dataNascimento.split('/');
+        const formattedDate = `${year}-${month}-${day} 00:00:00.000000`;
+
+
+        getUserByCPFAndNascimento({ cpf, dataNascimento: formattedDate }).then(resp => {
             console.log(resp)
-            if (resp?.data?.status == true) {
+            if (resp?.status == 200) {
                 getImagemByUserId({ id: resp?.data?.estudante_id }).then(res => {
 
                     setCurrentUser({ ...resp?.data, imagem: res.data.imagem })
@@ -40,8 +48,9 @@ const Login = () => {
             } else {
                 notify('Usuário inválido!')
             }
+        }).catch(err=>{
+              notify('Usuário inválido!')
         })
-        console.log('CPF:', cpf, 'Senha:', password);
     };
 
     const handleCpfChange = (e) => {
@@ -106,21 +115,24 @@ const Login = () => {
                                 </ReactInputMask>
                             </div>
                             <div className="input-group">
-                                <span className="icon"><FiLock /></span>
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                <span className="icon"><FiCalendar /></span>
+                                <ReactInputMask
+                                    mask="99/99/9999"
+                                    placeholder="Data de nascimento (dd/mm/aaaa)"
+                                    value={dataNascimento}
+                                    onChange={(e) => setDataNascimento(e.target.value)}
                                     onKeyDown={(e) => {
-                                        console.log('1222', e.key)
-                                        if (e.key == 'Enter') {
-                                            e.preventDefault()
-                                            handleLogin()
+                                        if (e.key === 'Enter') {
+                                            e.preventDefault();
+                                            handleLogin();
                                         }
                                     }}
-                                />
+                                >
+                                    {(inputProps) => <input {...inputProps} type="text" />}
+                                </ReactInputMask>
                             </div>
+
+
                             <button onClick={handleLogin} type="submit" className="button"><b>Acessar Carteira</b></button>
                         </div>
                     </div>

@@ -15,6 +15,13 @@ export const currentServer = host
 export const registarAcessoValidarCertificado = async ({ idUser, tipo }) =>
     axios.post(`${currentServer}/api/registarAcessoValidarCertificado`, { idUser, tipo })
 
+export const getUserByCPFAndNascimento = async ({ cpf, dataNascimento }) => { 
+  return axios.post(`${currentServer}/api/getUserByCPFAndNascimento`, {
+    cpf,
+    data_nascimento: dataNascimento,
+  },);
+};
+
 export const getImagemByUserId = async ({ id }) =>
     axios.get(`${currentServer}/api/imagem/${id}`)
 

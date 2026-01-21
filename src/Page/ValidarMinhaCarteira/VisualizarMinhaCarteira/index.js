@@ -69,8 +69,7 @@ export default function VisualizarMinhaCarteira() {
                 justifyContent: 'center',
                 alignItems: 'center',
             }}
-        >
-            <button onClick={()=>{console.log(currentUser)}}>rteste</button>
+        > 
             <>
                 <SuspendedButton handleGoMinhaCarteira={handleGoMinhaCarteira} />
                 {currentUser == null ? <HasNoCarteira email={userEmail} /> :
