@@ -7,12 +7,10 @@ import { escolaridadeAllBack, isCarteirinhaValida } from '../../../utils';
 import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 import { useStorageValidarCarteira } from '../StorageValidarCarteira';
-import { getInfoAluno } from '../../../Api';
 import { Button } from '@mui/material';
 import { getImagemByUserId, getInfoAlunoByCpf } from '../../../Api/MinhaCarteiraApi';
 
 export default function VisualizarMinhaCarteira() {
-    const hasCarteria = true;
 
     const handleGoMinhaCarteira = () => {
         navigate('/')
@@ -92,7 +90,6 @@ function Card({ text, data }) {
 
 export function HasCarteira({ currentUser }) {
 
-    const userData = mockAlunoEditApi
     const text = `UEB atesta que ${currentUser?.nome?.toUpperCase()} é estudante e está regularmente matrículado(a) em Ensino ${escolaridadeAllBack[currentUser?.escolaridade?.toUpperCase()] || currentUser?.escolaridade?.toUpperCase()} na instituição ${currentUser?.instituicao?.toUpperCase()}`;
 
     return (

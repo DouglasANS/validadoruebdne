@@ -1,7 +1,3 @@
-import { getAllCursos, getAllCursosEstudante } from "./Api";
-
-
-
 
 export const escolaridadeAll = [
     {

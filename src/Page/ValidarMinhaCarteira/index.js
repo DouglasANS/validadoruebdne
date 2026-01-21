@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Login.css';
-import { motion } from 'framer-motion';
-import { FiUser, FiLock, FiMail, FiCalendar } from 'react-icons/fi';
+import { FiUser, FiCalendar } from 'react-icons/fi';
 import logo from '../../assets/ueb.png'
 import loginimg from '../../assets/login2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import ReactInputMask from 'react-input-mask';
 import { useNavigate } from 'react-router-dom';
-import { getImagemByUserId, LoginUserMinhaCarteira } from '../../Api/MinhaCarteiraApi';
+import { getImagemByUserId } from '../../Api/MinhaCarteiraApi';
 import { notify } from '../../components/Notify';
-import { getInfoAluno, getUserByCPFAndNascimento } from '../../Api';
+import { getUserByCPFAndNascimento } from '../../Api';
 import Cookies from "js-cookie";
 import { useStorageValidarCarteira } from './StorageValidarCarteira';
 const Login = () => {

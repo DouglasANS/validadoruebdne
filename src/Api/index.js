@@ -28,7 +28,7 @@ export const getImagemByUserId = async ({ id }) =>
 export const updateCpfByEmail = async ({cpf, email}) =>
     axios.put(`${currentServer}/api/updateCpfByEmail`, {cpf, email})
 
-export const getInfoAlunoByCpf = async ({ cpf: cpf }) =>
+export const getInfoAlunoByCpf = async ({ cpf }) =>
     axios.get(`${currentServer}/api/getUserByCPF/${cpf}`)
 
 export const verifyEmailExist = async ({ userEmail }) =>

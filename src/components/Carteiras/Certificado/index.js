@@ -1,6 +1,4 @@
-import React from 'react'
 import { useFomaularioStorage } from '../../../storage'
-import { escolaridadeAllBack } from '../../../utils'
 
 export default function Certificado() {
     const { userData } = useFomaularioStorage(state => state.dados)
@@ -9,10 +7,10 @@ export default function Certificado() {
 
     const {
         nome = '',
-        escolaridade = '',
+        /* escolaridade = '', */
         instituicao = '',
         curso = '',
-        rg = '',
+       /*  rg = '', */
         codigoUso = '',
         imagem = '',
         cpf = '',

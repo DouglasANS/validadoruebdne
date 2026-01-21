@@ -12,5 +12,5 @@ export const getImagemByUserId = async ({ id }) =>
     axios.get(`${currentServer}/api/imagem/${id}`)
 
 
-export const getInfoAlunoByCpf = async ({ cpf: cpf }) =>
+export const getInfoAlunoByCpf = async ({ cpf }) =>
     axios.get(`${currentServer}/api/getUserByCPF/${cpf}`)

@@ -3,7 +3,6 @@ import { getInfoAluno, registarAcessoValidarCertificado } from '../../Api'
 import { useParams } from 'react-router-dom';
 import { useFomaularioStorage } from '../../storage';
 import DocValido from '../../components/Carteiras/DocValido';
-import { mockAlunoApi } from '../../mock';
 import LoadingUI from '../../components/LoadingUI';
 import ModalAtualizarCpf from '../../components/ModalUserAttCpf';
 import SolicitarCpf from '../../components/SolicitarCpf';

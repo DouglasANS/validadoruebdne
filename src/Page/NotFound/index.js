@@ -4,7 +4,7 @@ import error from '../../assets/error404.jpg'
 const NotFound = () => {
     return (
         <div style={styles.container}> 
-            <img src={error} width={400} />
+            <img src={error} width={400} alt="Imagem Not Found" />
             <p style={styles.message}>Ops! Página não encontrada.</p>
             <Link to="/" style={styles.button}>Voltar para o início</Link>
         </div>

@@ -7,7 +7,7 @@ import { escolaridadeAllBack } from '../../../utils'
 
 export default function DocValido() {
 
-    const { userData, currentImagem } = useFomaularioStorage(state => state.dados)
+    const { userData, /* currentImagem */ } = useFomaularioStorage(state => state.dados)
 
     if (Array.isArray(userData)) {
 
@@ -17,10 +17,10 @@ export default function DocValido() {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
 
                 <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px', width: '100vw' }}>
-                    <img src={nameCertificado} width={150} />
-                    <img src={meiaEntrada} width={150} />
+                    <img src={nameCertificado} width={150} alt='Nome do Certificado' />
+                    <img src={meiaEntrada} width={150} alt='Imagem Meia Entrada' />
                     <h4 style={{ padding: '10px 20px' }}><b>{text}</b></h4>
-                    <img src={textCertificado} style={{ width: '100%' }} />
+                    <img src={textCertificado} style={{ width: '100%' }} alt='Texto do Certificado'  />
                 </div>
             </div>
         )
@@ -31,10 +31,10 @@ export default function DocValido() {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
 
                 <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px', width: '100vw' }}>
-                    <img src={nameCertificado} width={150} />
-                    <img src={meiaEntrada} width={150} />
+                    <img src={nameCertificado} width={150} alt='Nome do Certificado' />
+                    <img src={meiaEntrada} width={150} alt='Imagem Meia Entrada' />
                     <h4 style={{ padding: '10px 20px' }}><b style={{fontFamily: 'Roboto',}}>{text}</b></h4>
-                    <img src={textCertificado} style={{ width: '100%' }} />
+                    <img src={textCertificado} style={{ width: '100%' }} alt='Texto do Certificado'/>
                 </div>
             </div>
         )
