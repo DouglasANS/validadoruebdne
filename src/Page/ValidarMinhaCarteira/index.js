@@ -26,14 +26,44 @@ const Login = () => {
 
 
     const handleLogin = () => {
+        if (cpf.length !== 11) {
+            return notify('Preencha o CPF corretamente!');
+        }
 
-        if (dataNascimento.length !== 10) return alert('Data de nascimento inválida. Use o formato DD/MM/AAAA');
-        const [day, month, year] = dataNascimento.split('/');
-        const formattedDate = `${year}-${month}-${day} 00:00:00.000000`;
+        if (dataNascimento.length !== 10) {
+            return notify('Data de nascimento inválida. Use o formato DD/MM/AAAA');
+        }
+
+        const [day, month, year] = dataNascimento.split('/').map(Number);
+
+        // Validação básica de faixa
+        if (
+            !day || !month || !year ||
+            day < 1 || month < 1 || month > 12 || year < 1900
+        ) {
+            return notify('Data de nascimento inválida.');
+        }
+
+        // Cria a data
+        const date = new Date(year, month - 1, day);
+
+        // Valida se a data realmente existe
+        if (
+            date.getFullYear() !== year ||
+            date.getMonth() !== month - 1 ||
+            date.getDate() !== day
+        ) {
+            return notify('Data de nascimento inexistente.');
+        }
+
+        // Se passou por tudo, pode formatar
+        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} 00:00:00.000000`;
+
 
 
         getUserByCPFAndNascimento({ cpf, dataNascimento: formattedDate }).then(resp => {
             console.log(resp)
+            if (resp?.data?.status === false) { return notify(resp?.data?.message) }
             if (resp?.status == 200) {
                 getImagemByUserId({ id: resp?.data?.estudante_id }).then(res => {
 
@@ -47,8 +77,8 @@ const Login = () => {
             } else {
                 notify('Usuário inválido!')
             }
-        }).catch(err=>{
-              notify('Usuário inválido!')
+        }).catch(err => {
+            notify('Usuário inválido!')
         })
     };
 
