@@ -7,7 +7,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "https://uenestudantil.com.br/$1",
+      "destination": "https://uebcarteirinha.com.br/$1",
       "permanent": true
     }
   ]
