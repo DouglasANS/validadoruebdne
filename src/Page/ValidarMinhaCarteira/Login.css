@@ -1,159 +1,378 @@
-/* Container principal */
+/* Importação de fonte moderna e limpa */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #53C593;
+  /* Verde da marca */
+  --primary-glow: rgba(83, 197, 147, 0.15);
+  --text-main: #1e293b;
+  /* Cinza escuro profissional */
+  --text-muted: #64748b;
+  /* Cinza claro para legendas */
+  --border-color: #e2e8f0;
+  /* Cor da borda padrão */
+  --bg-form: #ffffff;
+  /* Fundo do formulário */
+}
+
 .container {
-  display: flex; 
-  flex-direction: column;
-  min-height: 100vh; /* Garante que ocupe toda a altura da tela */
-}
-
-/* Painel esquerdo */
-.left-panel {
-  width: 100%;
-  flex: 1; /* Ocupa espaço disponível */
-  background-color: #fff;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-
-/* Painel direito */
-.right-panel {
-  width: 100%;
-  flex: 1;
-  background-color: #53C593;
-  display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-/* Card do login */
-.contentCardlogin {
-  width: 400px;
-  height: 500px;
-  border-radius: 10px;
-  background-color: aliceblue;
+  font-family: 'Inter', sans-serif;
   padding: 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* --- CONFIGURAÇÃO DO SEU PNG DE FUNDO --- */
+  background-color: #ffffff;
+  /* Cor de fundo padrão (branco) */
+  /* Descomente as linhas abaixo quando tiver o seu PNG: */
+  /* background-image: url('../../assets/seu_fundo.png'); */
+  /* background-size: cover; */
+  /* Cobre toda a tela */
+  /* background-position: center; */
+  /* Centraliza a imagem */
+  /* background-repeat: no-repeat; */
+  /* Não repete */
 }
 
-.contentCardlogin h2 {
-  text-align: center;
-  margin-top: 10px;
+/* O Card do formulário */
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1050px;
+  /* Um pouco mais estreito para visual clean */
+  background: var(--bg-form);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  /* Sombra suave */
+  border: 1px solid var(--border-color);
 }
 
-.formContainer {
-  height: 300px;
+/* Lado Visual - Removido fundo escuro */
+.visual-side {
+  flex: 1.1;
+  background-color: var(--primary);
+  /* Fundo verde sólido */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-
-.input-group {
+  padding: 50px;
+  color: white;
   position: relative;
-  margin-bottom: 16px; 
 }
 
-.input-group input {
-  height: 40px;
-  width: 260px;
-  padding: 0px 0px 0px 40px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
+.visual-side h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.visual-side p {
+  font-size: 1rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+/* Formulário - Lado Direito */
+.form-side {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.brand-area {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.logo-img {
+  width: 150px;
+  height: auto;
+}
+
+.logo-img2 {
+  width: 350px;
+  height: auto;
+}
+
+.benefit-item {
+  background: rgba(255, 255, 255, 0.08);
+  /* Mais sutil */
+  padding: 12px 18px;
+  /* Mais largo nas laterais */
+  border-radius: 16px;
+  /* Bordas mais orgânicas */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* Aumentado para não sufocar o texto */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 10px;
+  backdrop-filter: blur(5px);
+  /* Efeito sutil de profundidade */
+}
+
+.benefit-item:hover {
+  transform: translateX(8px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.benefit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Se o logo for colorido, um fundo branco ajuda a destacar */
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  /* Impede que o ícone amasse em telas menores */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-item div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.benefit-item strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.benefit-item p {
+  font-size: 0.8rem !important;
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.2;
+}
+
+.side-illustration {
+  text-align: center;
+}
+
+.form-side h2 {
+  color: var(--text-main);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-side .subtitle {
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+/* --- AJUSTE DE ESPAÇAMENTO DOS INPUTS --- */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* Espaço uniforme entre os campos */
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container label {
+  display: block;
+  color: var(--text-main);
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  /* Espaço entre o label e o input */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.custom-input-wrapper {
+  position: relative;
+}
+
+.custom-input-wrapper input {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  /* Padding uniforme para garantir que o texto não bata no ícone */
+  padding: 14px 14px 14px 45px;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  /* Garante que o padding não aumente o tamanho final */
+}
+
+.custom-input-wrapper input:focus {
   outline: none;
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px var(--primary-glow);
 }
 
-.input-group .icon {
+.input-icon {
   position: absolute;
-  left: 12px;
+  left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #53C593;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
 }
 
-.input-group input:focus {
-  border-color: #53C593;
-  background-color: transparent;
-  transform: scale(1.01);
+.custom-input-wrapper input:focus+.input-icon {
+  color: var(--primary);
 }
 
-.contentCardlogin button {
-  height: 40px;
-  width: 301px;
-  background-color: #53C593;
-  border-radius: 5px;
-  cursor: pointer;
+/* Botão Estilizado Profissional */
+.btn-login {
+  width: 100%;
+  padding: 15px;
+  background: var(--primary);
+  color: #ffffff;
   border: none;
-  color: white;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+  box-shadow: 0 4px 12px var(--primary-glow);
 }
 
-.contentCardlogin button:hover {
-  background-color: #53C593;
-  transform: scale(1.03);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+.btn-login:hover {
+  background: #42a379;
+  /* Tom mais escuro de verde */
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px var(--primary-glow);
 }
 
-.contentCardlogin img {
+/* Footer do formulário */
+.form-footer {
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
   text-align: center;
 }
 
-.text-gradient {
-  background: linear-gradient(90deg, #53C593, #3E1944);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 50px;
-  font-weight: bold;
-} 
-
-.imagemlogin2 {
-  width: 300px;
-  height: 350px;
+.form-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
 }
 
-/* Layout responsivo */
-@media (min-width: 937px) {
-  .imagemlogin2 {
-    width: 500px;
-    height: 550px;
+/* Elementos do lado Visual - Ajustados */
+.badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: fit-content;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.status-card {
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: fit-content;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;
+}
+
+/* Responsividade */
+@media (max-width: 850px) {
+  .visual-side {
+    display: none;
+  }
+
+  .brand-area {
+    margin-bottom: 30px;
+  }
+
+  .logo-img {
+    width: 100px;
+    height: auto;
+  }
+
+  .login-wrapper {
+    max-width: 450px;
+    border: none;
+    box-shadow: none;
   }
 
   .container {
+    padding: 0;
+    background-color: #ffffff;
+  }
+
+  .form-side {
+    padding: 30px;
+  }
+}
+
+/* Estilo do botão quando está em loading */
+.btn-login.btn-loading {
+    background-color: var(--text-muted);
+    cursor: not-allowed;
     display: flex;
-    flex-direction: row;
-  }
-
-  .right-panel {
-      width: 50%;
-      height: 100vh;
-  }
-
-  .left-panel {
-    width: 50%;
-    height: 100vh;
-  }
+    justify-content: center;
+    align-items: center;
 }
 
-/* Footer fixo sempre visível */
-.footer-login {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  padding: 15px 0;
-  background-color: #f5f5f5;
-  color: #333;
-  font-size: 14px;
-  z-index: 1000; /* Sempre acima do conteúdo */
+/* O Spinner (Círculo Girando) */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
 }
 
-.footer-login a {
-  color: #53C593;
-  text-decoration: none;
-  font-weight: bold;
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
-.footer-login a:hover {
-  text-decoration: underline;
+/* Desabilitar inputs durante o loading para evitar double-click */
+input:disabled {
+    background-color: #f8fafc !important;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
