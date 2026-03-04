@@ -10,6 +10,7 @@ import Validacao from './Page/Validacao';
 import Certificado from './Page/Certificado';
 import PoliticaDePrivacidade from './Page/Termos/PoliticaDePrivacidade';
 import TermosDeUso from './Page/Termos/TermosDeUso';
+import MinhaCarteira from './Page/MinhaCarteira';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/visualizaminhacarteira",
-    element: <VisualizarMinhaCarteira />,
+    element: <MinhaCarteira />,
   },
    {
     path: "/validar/:email",

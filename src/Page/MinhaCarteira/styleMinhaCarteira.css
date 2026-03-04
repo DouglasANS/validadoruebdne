@@ -1,0 +1,268 @@
+/* =========================================
+   RESET E FUNDO DA PÁGINA
+   ========================================= */
+.main-viewport-modern {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    /* 1️⃣ Definimos a imagem para repetir e o gradiente como base */
+    background-image: 
+        url('/src/assets/fundoeduc1.png'), 
+        linear-gradient(135deg, #e0f2f1 0%, #fffbef 50%, #fbffd9 100%);
+    
+    /* 2️⃣ Configuramos a repetição apenas para a primeira camada (a imagem) */
+    background-repeat: repeat, no-repeat;
+    
+    /* 3️⃣ Definimos o tamanho da imagem. 
+       Ajuste os '200px' para aumentar ou diminuir o tamanho dos ícones soltos */
+    background-size: 300px, cover; 
+    
+    background-attachment: fixed;
+    font-family: 'Inter', sans-serif;
+}
+
+.content-container-modern {
+    flex: 1;
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+/* =========================================
+   LADO ESQUERDO: CARTEIRA (DESIGN NOVO)
+   ========================================= */
+.wallet-preview-zone {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    /* Mantém a carteira visível na rolagem no desktop */
+    top: 120px;
+}
+
+.perspective-wrapper {
+    perspective: 2000px;
+    /* Perspectiva mais suave */
+}
+
+.wallet-card-glass {
+    border-radius: 16px;
+    /* Bordas ligeiramente menos arredondadas */
+    overflow: hidden;
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    /* Transição suave */
+
+    /* REMOVIDO: border: 8px solid #fff; (Isso deixa o design pesado) */
+
+    /* Sombra projetada mais realista e suave */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+
+    background: #fff;
+    /* Fundo fallback */
+}
+
+/* Efeito de rotação suave no Hover */
+.wallet-card-glass:hover {
+    transform: rotateY(-5deg) rotateX(5deg) translateY(-5px);
+    box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.25) !important;
+}
+
+.image-contain {
+    line-height: 0;
+    /* Remove espaços em branco indesejados abaixo da imagem */
+}
+
+.wallet-img-clean {
+    width: 340px;
+    /* Ligeiramente maior */
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Brilho reflexivo por cima da carteira (Ajustado) */
+.glass-reflection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Degradê de brilho mais sutil */
+    background: linear-gradient(125deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0.05) 60%, rgba(255, 255, 255, 0.1) 100%);
+    pointer-events: none;
+}
+
+/* =========================================
+   LADO DIREITO: PAINEL INFO (DESIGN NOVO)
+   ========================================= */
+.info-panel-glass {
+    /* Efeito Glassmorphism sutil */
+    background: rgb(255, 255, 255) !important;
+    backdrop-filter: blur(10px);
+    /* Desfoque do fundo */
+    -webkit-backdrop-filter: blur(10px);
+
+    padding: 50px;
+    /* Mais respiro */
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    /* Borda "vidro" */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
+}
+
+.welcome-text-clean {
+    font-weight: 800 !important;
+    color: #1a1a1a;
+    letter-spacing: -1px !important;
+}
+
+.subtitle-text-clean {
+    color: #555;
+    font-weight: 400;
+}
+
+.status-chip-modern {
+    font-weight: bold;
+    border-radius: 8px !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+.divider-clean {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* CARDS DE INFORMAÇÕES RÁPIDAS (DESIGN NOVO) */
+.mini-card-modern {
+    padding: 16px 20px;
+    border-radius: 12px !important;
+    background: #fff !important;
+    /* Card branco limpo */
+    border: 1px solid #f0f0f0 !important;
+    flex: 1;
+    transition: transform 0.2s ease;
+}
+
+.mini-card-modern:hover {
+    transform: translateY(-2px);
+    border-color: #e0e0e0 !important;
+}
+
+.label-mini-card {
+    display: block;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem !important;
+    margin-bottom: 2px;
+}
+
+.value-mini-card {
+    font-weight: 700 !important;
+    color: #222;
+}
+
+.icon-primary {
+    color: #006ADC;
+}
+
+.icon-secondary {
+    color: #8e44ad;
+}
+
+/* ÁREA DE ACTION/DOWNLOAD (DESIGN NOVO) */
+.action-card-modern {
+    background: #fff !important;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #f0f0f0 !important;
+    /* REMOVIDO: border: 1px dashed (Isso parece antigo) */
+}
+
+.download-title-area {
+    color: #444;
+}
+
+/* Estilo do Botão vindo do componente pai (ButtonPng) - RENOVA */
+.action-card-modern button {
+    width: 100% !important;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    /* Degradê no botão */
+    color: white !important;
+    height: 52px !important;
+    /* Um pouco mais baixo, mais elegante */
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    font-size: 1rem !important;
+
+    /* Sombra do botão mais suave */
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2) !important;
+    transition: all 0.2s ease !important;
+}
+
+.action-card-modern button:hover:not(:disabled) {
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.3) !important;
+    transform: translateY(-1px);
+}
+
+.action-card-modern button:disabled {
+    background: #dae0e5 !important;
+    color: #888 !important;
+}
+
+/* CARD DE DICA (DESIGN NOVO) */
+.tip-card-modern {
+    padding: 16px 20px;
+    background: #eef7ff !important;
+    /* Azul muito claro */
+    border-radius: 12px !important;
+    border: none !important;
+}
+
+.tip-text {
+    color: #004e9a !important;
+    line-height: 1.5 !important;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================= */
+@media (max-width: 900px) {
+    .content-container-modern {
+        padding-top: 32px;
+    }
+
+    .wallet-preview-zone {
+        position: static;
+        /* Remove o sticky no mobile */
+        margin-bottom: 32px;
+    }
+
+    .perspective-wrapper {
+        transform: none;
+    }
+
+    .wallet-card-glass {
+        width: 100%;
+        max-width: 320px;
+        /* Previne que fique muito grande */
+        transform: none !important;
+        /* Remove hover effect */
+    }
+
+    .info-panel-glass {
+        padding: 30px;
+        /* Menos padding no mobile */
+        background: #fff !important;
+        /* Remove glass effect para melhor leitura */
+    }
+
+    .welcome-text-clean {
+        font-size: 1.75rem !important;
+    }
+
+    .mini-card-modern {
+        padding: 12px;
+    }
+}
