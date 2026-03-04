@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import {
     AppBar, Toolbar, Typography, Container, Box, Avatar,
-    Stack, IconButton, Menu, MenuItem, ListItemIcon, Divider
+    Stack, Menu, MenuItem, ListItemIcon, Divider, ButtonBase
 } from '@mui/material';
-import { Wallet, LogOut } from 'lucide-react';
+import { LogOut, Settings, ChevronDown, User } from 'lucide-react';
 import Cookies from "js-cookie";
-import { useNavigate } from 'react-router-dom'; // Hook correto para redirecionamento
+import { useNavigate } from 'react-router-dom';
 
 export default function Header({ userName }) {
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
-    // 1️⃣ VERIFICAÇÃO DE SEGURANÇA: Redireciona se os cookies não existirem
     useEffect(() => {
         const usuario = Cookies.get("usuario");
         const cpf = Cookies.get("cpf");
         const userId = Cookies.get("user_id");
 
         if (!usuario || !cpf || !userId) {
-            navigate('/'); // Redireciona para o login se algum faltar
+            navigate('/');
         }
     }, [navigate]);
 
-    // 2️⃣ FUNÇÃO DE LOGOUT
     const handleLogout = () => { 
         Cookies.remove("usuario");
         Cookies.remove("cpf");
         Cookies.remove("user_id");
- 
-        navigate('/'); // Navega para a home
+        navigate('/');
     };
 
     const handleClick = (event) => {
@@ -40,18 +37,13 @@ export default function Header({ userName }) {
         setAnchorEl(null);
     };
 
-    const handleLogoutAction = () => {
-        handleLogout();
-        handleClose();
-    };
-
     return (
         <AppBar
             position="sticky"
             elevation={0}
             sx={{
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                backdropFilter: 'blur(10px)',
+                backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(12px)',
                 borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
                 color: '#1a1a1a',
                 mb: 4
@@ -60,44 +52,63 @@ export default function Header({ userName }) {
             <Container maxWidth="xl">
                 <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 0 } }}>
 
-                    {/* LOGO / TÍTULO */}
-                    <Stack direction="row" alignItems="center" spacing={1.5}> 
+                    {/* LOGO */}
+                    <Stack direction="row" alignItems="center" spacing={1.5}>
                         <Typography variant="h6" fontWeight="700" sx={{ letterSpacing: '-0.5px' }}>
                             UEB <span style={{ color: '#53C593' }}>Carteirinha</span>
                         </Typography>
                     </Stack>
 
-                    {/* SEÇÃO DO USUÁRIO */}
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                        <Box sx={{ textAlign: 'right', display: { xs: 'none', sm: 'block' }, mr: 1 }}>
-                            <Typography variant="subtitle2" fontWeight="600" lineHeight={1}>
-                                {userName || "Estudante"}
-                            </Typography>
-                            <Typography variant="caption" color="text.secondary">
-                                Portal do Aluno
-                            </Typography>
-                        </Box>
-
-                        <IconButton
-                            onClick={handleClick}
-                            size="small"
-                            sx={{ p: 0 }}
-                        >
+                    {/* BOTÃO DE PERFIL/CONFIGURAÇÃO */}
+                    <ButtonBase
+                        onClick={handleClick}
+                        sx={{
+                            p: '6px 12px',
+                            borderRadius: '50px',
+                            transition: 'all 0.2s ease',
+                            backgroundColor: open ? 'rgba(83, 197, 147, 0.1)' : 'rgba(0, 0, 0, 0.03)',
+                            border: '1px solid',
+                            borderColor: open ? '#53C593' : 'transparent',
+                            '&:hover': {
+                                backgroundColor: 'rgba(83, 197, 147, 0.08)',
+                                transform: 'translateY(-1px)'
+                            }
+                        }}
+                    >
+                        <Stack direction="row" alignItems="center" spacing={1.5}>
                             <Avatar
                                 sx={{
-                                    bgcolor: '#f0fdf4',
-                                    color: '#53C593',
-                                    fontWeight: 'bold',
-                                    border: '2px solid #fff',
-                                    boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                                    transition: 'transform 0.2s',
-                                    '&:hover': { transform: 'scale(1.05)' }
+                                    width: 32,
+                                    height: 32,
+                                    bgcolor: '#53C593',
+                                    color: '#fff',
+                                    fontSize: '0.875rem',
+                                    fontWeight: '700',
+                                    boxShadow: '0 2px 8px rgba(83, 197, 147, 0.3)'
                                 }}
                             >
                                 {userName ? userName.charAt(0).toUpperCase() : 'U'}
                             </Avatar>
-                        </IconButton>
-                    </Stack>
+                            
+                            <Box sx={{ textAlign: 'left', display: { xs: 'none', sm: 'block' } }}>
+                                <Typography variant="subtitle2" fontWeight="700" sx={{ lineHeight: 1.2 }}>
+                                    Meu Perfil
+                                </Typography>
+                                <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+                                    Opções
+                                </Typography>
+                            </Box>
+
+                            <ChevronDown 
+                                size={18} 
+                                color={open ? '#53C593' : '#666'} 
+                                style={{ 
+                                    transition: 'transform 0.3s',
+                                    transform: open ? 'rotate(180deg)' : 'rotate(0deg)' 
+                                }} 
+                            />
+                        </Stack>
+                    </ButtonBase>
 
                     {/* MENU DROPDOWN */}
                     <Menu
@@ -111,17 +122,18 @@ export default function Header({ userName }) {
                         PaperProps={{
                             elevation: 0,
                             sx: {
-                                overflow: 'visible',
-                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.1))',
                                 mt: 1.5,
-                                borderRadius: '12px',
-                                minWidth: 180,
+                                borderRadius: '16px',
+                                minWidth: 200,
+                                border: '1px solid rgba(0,0,0,0.08)',
+                                boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+                                overflow: 'visible',
                                 '&:before': {
                                     content: '""',
                                     display: 'block',
                                     position: 'absolute',
                                     top: 0,
-                                    right: 14,
+                                    right: 20,
                                     width: 10,
                                     height: 10,
                                     bgcolor: 'background.paper',
@@ -132,18 +144,35 @@ export default function Header({ userName }) {
                         }}
                     >
                         <Box sx={{ px: 2, py: 1.5 }}>
-                            <Typography variant="subtitle2" noWrap fontWeight="700">
+                            <Typography variant="caption" fontWeight="700" color="text.disabled" sx={{ textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                Aluno Logado
+                            </Typography>
+                            <Typography variant="subtitle1" fontWeight="800" noWrap>
                                 {userName || "Estudante"}
                             </Typography>
                         </Box>
 
                         <Divider sx={{ my: 0.5, opacity: 0.6 }} />
 
-                        <MenuItem onClick={handleLogoutAction} sx={{ color: '#d32f2f', py: 1.5 }}>
+                        <MenuItem disabled sx={{ py: 1.2 }}>
+                            <ListItemIcon>
+                                <Settings size={18} />
+                            </ListItemIcon>
+                            Configurações
+                        </MenuItem>
+
+                        <MenuItem 
+                            onClick={handleLogout} 
+                            sx={{ 
+                                py: 1.5, 
+                                color: '#d32f2f',
+                                '&:hover': { backgroundColor: '#fff5f5' }
+                            }}
+                        >
                             <ListItemIcon>
                                 <LogOut size={18} color="#d32f2f" />
                             </ListItemIcon>
-                            Sair da conta
+                            <Typography fontWeight="600">Sair da conta</Typography>
                         </MenuItem>
                     </Menu>
 
