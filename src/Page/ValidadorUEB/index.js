@@ -22,11 +22,13 @@ export default function ValidadorUEB() {
     const { cpf, codUso } = useParams();
 
     useEffect(() => {
+        if (!cpf || !codUso) return;
+
         const carregarDadosEstudante = async () => {
             try {
                 setLoading(true);
                 const resUser = await getUserByCPFAndCodUsoApi({ cpf, codUso });
-                const userData = resUser.data.data;
+                const userData = resUser?.data?.data;;
                 setCurrentUser(userData);
 
                 if (userData?.id) {
@@ -40,7 +42,7 @@ export default function ValidadorUEB() {
             }
         };
 
-        if (cpf && codUso) carregarDadosEstudante();
+        carregarDadosEstudante();
     }, [cpf, codUso]);
 
     if (loading) return <div style={styles.center}>Validando credenciais...</div>;
@@ -48,60 +50,60 @@ export default function ValidadorUEB() {
 
     return (
         <>
-        <div style={styles.pageWrapper}>
-            <div style={styles.container}>
-                {/* CABEÇALHO */}
-                <div style={styles.header}>
-                    <h1 style={styles.title}>Validação de CIE</h1>
-                    <p style={styles.subtitle}>CARTEIRA DE IDENTIDADE ESTUDANTIL</p>
-                </div>
-
-                {/* STATUS */}
-                <div style={styles.statusBadge}>
-                    <div style={styles.statusDot} />
-                    DOCUMENTO VÁLIDO
-                </div>
-
-                {/* TEXTO DE ATESTAÇÃO */}
-                <div style={styles.atestacaoBox}>
-                    <p style={styles.atestacaoText}>
-                        A <b>UEB</b> atesta que <b>{currentUser?.nome?.toUpperCase()}</b> é estudante e encontra-se regularmente matriculado(a) no curso de <b>{currentUser?.curso}</b> na instituição <b>{currentUser?.instituicao}</b>.
-                    </p>
-                </div>
-
-                <div style={styles.divider} />
-
-                {/* PERFIL */}
-                <div style={styles.profileSection}>
-                    <div style={styles.photoWrapper}>
-                        {imagem ? (
-                            <img src={imagem} alt="Estudante" style={styles.photo} />
-                        ) : (
-                            <div style={styles.photoPlaceholder}>SEM FOTO</div>
-                        )}
+            <div style={styles.pageWrapper}>
+                <div style={styles.container}>
+                    {/* CABEÇALHO */}
+                    <div style={styles.header}>
+                        <h1 style={styles.title}>Validação de CIE</h1>
+                        <p style={styles.subtitle}>CARTEIRA DE IDENTIDADE ESTUDANTIL</p>
                     </div>
 
-                    <div style={styles.infoGrid}>
-                        <InfoField label="Nome Completo" value={currentUser?.nome} />
-                        <InfoField label="CPF" value={formatarCPF(cpf)} />
-                        <InfoField label="Data de Nascimento" value={currentUser?.dataNascimento} />
-                        <InfoField label="Código de Uso" value={currentUser?.codigoUso} />
-                        <InfoField label="Instituição" value={currentUser?.instituicao} />
-                        <InfoField label="Emissor" value="UEB (UEB NEGOCIOS E SERVICOS LTDA)" />
+                    {/* STATUS */}
+                    <div style={styles.statusBadge}>
+                        <div style={styles.statusDot} />
+                        DOCUMENTO VÁLIDO
                     </div>
-                </div>
 
-                {/* CERTIFICADO DIGITAL */}
-                <div style={styles.certHeader}>Certificado de Atributo:</div>
-                <CertificateDisplay content={textCode} />
-                
-                <footer style={styles.footer}>
-                    Validação Oficial Digital
-                </footer>
+                    {/* TEXTO DE ATESTAÇÃO */}
+                    <div style={styles.atestacaoBox}>
+                        <p style={styles.atestacaoText}>
+                            A <b>UEB</b> atesta que <b>{currentUser?.nome?.toUpperCase()}</b> é estudante e encontra-se regularmente matriculado(a) no curso de <b>{currentUser?.curso}</b> na instituição <b>{currentUser?.instituicao}</b>.
+                        </p>
+                    </div>
+
+                    <div style={styles.divider} />
+
+                    {/* PERFIL */}
+                    <div style={styles.profileSection}>
+                        <div style={styles.photoWrapper}>
+                            {imagem ? (
+                                <img src={imagem} alt="Estudante" style={styles.photo} />
+                            ) : (
+                                <div style={styles.photoPlaceholder}>SEM FOTO</div>
+                            )}
+                        </div>
+
+                        <div style={styles.infoGrid}>
+                            <InfoField label="Nome Completo" value={currentUser?.nome} />
+                            <InfoField label="CPF" value={formatarCPF(cpf)} />
+                            <InfoField label="Data de Nascimento" value={currentUser?.dataNascimento} />
+                            <InfoField label="Código de Uso" value={currentUser?.codigoUso} />
+                            <InfoField label="Instituição" value={currentUser?.instituicao} />
+                            <InfoField label="Emissor" value="UEB (UEB NEGOCIOS E SERVICOS LTDA)" />
+                        </div>
+                    </div>
+
+                    {/* CERTIFICADO DIGITAL */}
+                    <div style={styles.certHeader}>Certificado de Atributo:</div>
+                    <CertificateDisplay content={textCode} />
+
+                    <footer style={styles.footer}>
+                        Validação Oficial Digital
+                    </footer>
+                </div>
             </div>
-        </div>
             <Footer />
-            </>
+        </>
     );
 }
 
@@ -125,7 +127,7 @@ function CertificateDisplay({ content }) {
 }
 
 function formatarCPF(cpf) {
-    if(!cpf) return '';
+    if (!cpf) return '';
     const cleanCpf = cpf.replace(/\D/g, '');
     return cleanCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
 }

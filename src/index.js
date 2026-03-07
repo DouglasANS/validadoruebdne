@@ -4,7 +4,6 @@ import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import NotifyComp from './components/Notify';
 import ValidarMinhaCarteira from './Page/ValidarMinhaCarteira';
-import VisualizarMinhaCarteira from './Page/ValidarMinhaCarteira/VisualizarMinhaCarteira';
 import NotFound from './Page/NotFound';
 import Validacao from './Page/Validacao';
 import Certificado from './Page/Certificado';
@@ -12,55 +11,61 @@ import PoliticaDePrivacidade from './Page/Termos/PoliticaDePrivacidade';
 import TermosDeUso from './Page/Termos/TermosDeUso';
 import MinhaCarteira from './Page/MinhaCarteira';
 import ValidadorUEB from './Page/ValidadorUEB';
+import ErrorPage from './Page/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <ValidarMinhaCarteira />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/visualizaminhacarteira",
-    element: <MinhaCarteira />,
+    element: <MinhaCarteira />, 
+    errorElement: <ErrorPage />,
   },
   {
     path: "/validar/:email",
     element: <Validacao />,
-    errorElement: <NotFound />
+    errorElement: <NotFound />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/certificado/:email",
     element: <Certificado />,
-    errorElement: <NotFound />
+    errorElement: <NotFound />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/validar",
     element: <Validacao />,
-    errorElement: <NotFound />
+    errorElement: <ErrorPage />,
   },
   {
     path: "/certificado",
     element: <Certificado />,
-    errorElement: <NotFound />
+    errorElement: <ErrorPage />,
   },
   {
     path: "validador/:cpf/:codUso",
     element: <ValidadorUEB />,
-    errorElement: <NotFound />
+    errorElement: <ErrorPage />,
   },
-
-
-
 
   {
     path: "/politica-de-privacidade",
     element: <PoliticaDePrivacidade />,
-    errorElement: <NotFound />
+    errorElement: <ErrorPage />,
   },
   {
     path: "/termos-de-uso",
     element: <TermosDeUso />,
-    errorElement: <NotFound />
+    errorElement: <ErrorPage />
   },
+  {
+    path: "*", // Captura rotas inexistentes (404)
+    element: <NotFound />,
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
