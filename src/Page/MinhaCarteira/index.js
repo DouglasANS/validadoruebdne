@@ -97,7 +97,7 @@ export default function MinhaCarteira() {
 
                     {/* LINHA 2 - BENEFÍCIOS (Abaixo do bloco unificado) */}
                     <Grid item xs={12} lg={10}>
-                        <CardValidacaoDigital cpf={userData?.cpf} />
+                        <CardValidacaoDigital cpf={userData?.cpf}  walletStatus={walletStatus} />
                     </Grid>
                     <Grid item xs={12} lg={10}>
                         <BeneficiosEAutenticacao codId={userData?.codId} />

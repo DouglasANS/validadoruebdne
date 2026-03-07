@@ -11,6 +11,7 @@ import Certificado from './Page/Certificado';
 import PoliticaDePrivacidade from './Page/Termos/PoliticaDePrivacidade';
 import TermosDeUso from './Page/Termos/TermosDeUso';
 import MinhaCarteira from './Page/MinhaCarteira';
+import ValidadorUEB from './Page/ValidadorUEB';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     path: "/visualizaminhacarteira",
     element: <MinhaCarteira />,
   },
-   {
+  {
     path: "/validar/:email",
     element: <Validacao />,
     errorElement: <NotFound />
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
   {
     path: "/certificado",
     element: <Certificado />,
+    errorElement: <NotFound />
+  },
+  {
+    path: "validador/:cpf/:codUso",
+    element: <ValidadorUEB />,
     errorElement: <NotFound />
   },
 
@@ -64,4 +70,4 @@ root.render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
- 
+

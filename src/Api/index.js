@@ -10,7 +10,7 @@ import axios from "axios";
 const local = 'http://localhost:3002'
 const host = 'https://backendfunemg-backfune.alehbv.easypanel.host'
 
-export const currentServer = local
+export const currentServer = host
 
 const api = axios.create({
     baseURL: currentServer,
@@ -25,6 +25,12 @@ export const getUserByCPFAndNascimento = async ({ cpf, dataNascimento }) => {
     return axios.post(`${currentServer}/api/getUserByCPFAndNascimento`, {
         cpf,
         data_nascimento: dataNascimento,
+    },);
+};
+export const getUserByCPFAndCodUsoApi = async ({ cpf, codUso }) => {
+    return axios.post(`${currentServer}/api/getUserByCPFAndCodUso`, {
+        cpf,
+        codigo_uso: codUso,
     },);
 };
 
