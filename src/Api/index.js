@@ -37,50 +37,44 @@ export const getUserByCPFAndCodUsoApi = async ({ cpf, codUso }) => {
 export const generatePdfValidadorDigitalApi = async ({ cpf }) => {
     try {
         const response = await api.post(
-            '/api/validarpdf', // Certifique-se que a rota está correta
+            '/api/validarpdf',
             { cpf },
             {
                 responseType: 'blob', 
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/pdf' // Indica que você espera um PDF
+                    'Accept': 'application/pdf'
                 }
             }
         );
 
-        // 1. Cria o Blob garantindo o tipo 'application/pdf'
-        // Isso é vital para que assinaturas digitais sejam reconhecidas por leitores de PDF
+        // 1. Criar o Blob
         const blob = new Blob([response.data], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
 
-        // 2. No Mobile (iOS/Android), abrir em nova aba é mais seguro para PDFs assinados
-        // pois permite que o usuário veja o selo de assinatura antes de salvar.
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        // 2. Criar um link invisível
+        const link = document.createElement('a');
+        link.href = url;
+        
+        // Nome do arquivo que aparecerá para o usuário
+        const filename = `validacao_assinada_${cpf}.pdf`;
+        link.download = filename;
 
-        if (isMobile) {
-            // Em mobile, abrimos o PDF diretamente. O usuário pode salvar pelo menu do sistema.
-            window.open(url, '_blank');
-        } else {
-            // No Desktop, forçamos o download
-            const link = document.createElement('a');
-            link.href = url;
-            const filename = `validacao_assinada_${cpf}.pdf`;
-            link.setAttribute('download', filename);
-            
-            document.body.appendChild(link);
-            link.click();
-            
-            // Limpeza
-            setTimeout(() => {
-                document.body.removeChild(link);
-            }, 100);
-        }
+        // 3. Adicionar ao corpo do documento (necessário para alguns navegadores mobile)
+        document.body.appendChild(link);
 
-        // Importante: Não revogar o objeto imediatamente se abrir em nova aba
-        // pois o navegador precisa da URL ativa para renderizar o PDF.
+        // 4. Disparar o clique
+        // No Mobile, isso geralmente inicia o download ou abre a caixa de diálogo do sistema
+        link.click();
+
+        // 5. Limpeza necessária
+        document.body.removeChild(link);
+
+        // Importante: No mobile, não podemos revogar a URL imediatamente.
+        // O iOS Safari, por exemplo, pode falhar se a URL sumir antes do sistema terminar o "handshake".
         setTimeout(() => {
             window.URL.revokeObjectURL(url);
-        }, 5000); // 5 segundos é seguro
+        }, 10000); // 10 segundos de folga para garantir
 
         return response;
     } catch (error) {
