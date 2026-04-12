@@ -40,13 +40,33 @@ export const generatePdfValidadorDigitalApi = async ({ cpf }) => {
             '/api/validarpdf',
             { cpf },
             {
-                responseType: 'blob', 
+                responseType: 'blob',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/pdf'
                 }
             }
         );
+
+         let filename = `carteirinha_${cpf}.pdf`; // Fallback caso algo dê errado
+        const contentDisposition = response.headers['content-disposition'] || response.headers['Content-Disposition'];
+
+        console.log('11', contentDisposition)
+
+        if (contentDisposition) {
+            /**
+             * Este Regex procura por 'filename=' seguido por:
+             * 1. Uma aspa opcional ("?)
+             * 2. O conteúdo que NÃO seja aspa ou ponto e vírgula ([^";]+) -> Captura aqui!
+             * 3. Uma aspa opcional final ("?)
+             */
+            const filenameMatch = contentDisposition.match(/filename="?([^";]+)"?/);
+
+            if (filenameMatch && filenameMatch[1]) {
+                // .trim() remove espaços e .replace remove aspas extras caso o regex falhe em algo
+                filename = filenameMatch[1].trim().replace(/^"|"$/g, '');
+            }
+        }
 
         // 1. Criar o Blob
         const blob = new Blob([response.data], { type: 'application/pdf' });
@@ -55,9 +75,8 @@ export const generatePdfValidadorDigitalApi = async ({ cpf }) => {
         // 2. Criar um link invisível
         const link = document.createElement('a');
         link.href = url;
-        
-        // Nome do arquivo que aparecerá para o usuário
-        const filename = `validacao_assinada_${cpf}.pdf`;
+
+        // Nome do arquivo que aparecerá para o usuário 
         link.download = filename;
 
         // 3. Adicionar ao corpo do documento (necessário para alguns navegadores mobile)
@@ -89,12 +108,35 @@ export const generatePdfCarteirinhaDigitalApi = async ({ cpf }) => {
             '/api/generatePdfEstudante',
             { cpf },
             {
-                responseType: 'blob', 
+                responseType: 'blob',
                 headers: {
                     'Content-Type': 'application/json',
                 }
             }
         );
+
+
+        // --- EXTRAÇÃO DO NOME DO ARQUIVO ---
+        let filename = `carteirinha_${cpf}.pdf`; // Fallback caso algo dê errado
+        const contentDisposition = response.headers['content-disposition'] || response.headers['Content-Disposition'];
+
+        console.log('11', contentDisposition)
+
+        if (contentDisposition) {
+            /**
+             * Este Regex procura por 'filename=' seguido por:
+             * 1. Uma aspa opcional ("?)
+             * 2. O conteúdo que NÃO seja aspa ou ponto e vírgula ([^";]+) -> Captura aqui!
+             * 3. Uma aspa opcional final ("?)
+             */
+            const filenameMatch = contentDisposition.match(/filename="?([^";]+)"?/);
+
+            if (filenameMatch && filenameMatch[1]) {
+                // .trim() remove espaços e .replace remove aspas extras caso o regex falhe em algo
+                filename = filenameMatch[1].trim().replace(/^"|"$/g, '');
+            }
+        }
+        // ------------------------------------
 
         // 1. Cria o Blob com o tipo MIME correto (importante para mobile reconhecer como PDF)
         const blob = new Blob([response.data], { type: 'application/pdf' });
@@ -105,19 +147,19 @@ export const generatePdfCarteirinhaDigitalApi = async ({ cpf }) => {
         link.href = url;
 
         // 3. Define o nome do arquivo
-        const filename = `carteirinha_${cpf}.pdf`;
+
         link.setAttribute('download', filename);
 
         // --- AJUSTES PARA MOBILE ---
         // Abre em nova aba se o download automático falhar (comum no iOS/Safari)
-        link.target = '_blank'; 
+        link.target = '_blank';
         link.rel = 'noopener noreferrer';
         // ---------------------------
 
         // 4. Executa o clique
         document.body.appendChild(link);
         link.click();
-        
+
         // Pequeno delay antes de remover para garantir que o navegador mobile processe o clique
         setTimeout(() => {
             document.body.removeChild(link);
