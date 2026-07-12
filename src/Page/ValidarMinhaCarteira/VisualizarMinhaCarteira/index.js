@@ -34,14 +34,17 @@ export default function VisualizarMinhaCarteira() {
 
             getInfoAlunoByCpf({ cpf: cpf }).then(resp => {
 
-                const isValid = isCarteirinhaValida(resp?.data.validadeCarteirinha)
+                // Só a carteirinha do ano vigente (2026) é válida. Se a mais recente
+                // for de outro ano (ex.: 2025), NÃO mostra — cai no "não válida".
+                const ehAnoVigente = String(resp?.data?.ano) === '2026'
+                const isValid = ehAnoVigente && isCarteirinhaValida(resp?.data.validadeCarteirinha)
 
                 if(!isValid){
                     return setCurrentUser(null)
                 }
                 getImagemByUserId({ id: resp?.data?.estudante_id }).then(res => {
 
-                    setCurrentUser({ ...resp?.data, imagem: res.data.imagem })  
+                    setCurrentUser({ ...resp?.data, imagem: res.data.imagem })
                 })
 
 

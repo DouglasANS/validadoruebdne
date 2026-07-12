@@ -266,3 +266,30 @@
         padding: 12px;
     }
 }
+/* Placeholder quando a carteirinha não é vigente (não mostra o PNG digital) */
+.wallet-img-indisponivel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    padding: 40px 24px;
+    min-height: 320px;
+    border-radius: 24px;
+    border: 2px dashed rgba(225, 29, 72, 0.35);
+    background: rgba(225, 29, 72, 0.06);
+    color: #e11d48;
+}
+
+.wallet-img-indisponivel strong {
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.wallet-img-indisponivel span {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #7f1d2b;
+    max-width: 280px;
+}

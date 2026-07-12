@@ -27,12 +27,18 @@ export default function MinhaCarteira() {
             try {
                 const res = await getInfoAlunoByCpf({ cpf });
                 setUserData(res.data);
-                console.log(res.data);
 
-                const imgRes = await getUserCarteirinhaByCpfPngApi({ cpf });
-                setImagem(URL.createObjectURL(imgRes.data));
+                // Só a carteirinha VIGENTE (2026 e não expirada) mostra o PNG digital.
+                // Se a mais recente for de outro ano (ex.: 2025) ou expirada, NÃO busca
+                // nem exibe a imagem — a tela mostra o estado "não vigente".
+                const anoVigente = String(res.data?.ano) === '2026';
+                const status = getWalletStatus(res.data?.validadeCarteirinha);
+                if (anoVigente && status !== 'expired') {
+                    const imgRes = await getUserCarteirinhaByCpfPngApi({ cpf });
+                    setImagem(URL.createObjectURL(imgRes.data));
+                }
             } catch (err) {
-                setImagem('https://via.placeholder.com/320x200.png?text=Erro+ao+Carregar');
+                // erro ao carregar → deixa sem imagem (mostra o placeholder)
             } finally {
                 setLoading(false);
             }
@@ -70,15 +76,22 @@ export default function MinhaCarteira() {
                                 {/* LADO ESQUERDO: IMAGEM CENTRALIZADA */}
                                 <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <Box className="perspective-wrapper" sx={{ width: '100%', maxWidth: '380px' }}>
-                                        <div className="image-contain" style={{ margin: '0 auto' }}>
-                                            <img
-                                                src={imagem}
-                                                onLoad={() => setImageReady(true)}
-                                                className="wallet-img-clean"
-                                                alt="Carteira"
-                                                style={{ width: '100%', height: 'auto', display: 'block' }}
-                                            />
-                                        </div>
+                                        {imagem ? (
+                                            <div className="image-contain" style={{ margin: '0 auto' }}>
+                                                <img
+                                                    src={imagem}
+                                                    onLoad={() => setImageReady(true)}
+                                                    className="wallet-img-clean"
+                                                    alt="Carteira"
+                                                    style={{ width: '100%', height: 'auto', display: 'block' }}
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="wallet-img-indisponivel">
+                                                <XCircle size={44} />
+                                                <strong>Carteirinha não vigente</strong> 
+                                            </div>
+                                        )}
                                     </Box>
                                 </Grid>
 
